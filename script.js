@@ -11,21 +11,28 @@ const sideBarDiv = document.querySelector('.sidebar');
 const formSubmit = document.getElementById('submit-form');
 
 
-function Book(name) {
+function Book(author, title, numberOfPages, read) {
     // the constructor...
-    this.name = name;
+    this.author = author;
+    this.title = title;
+    this.numberOfPages = numberOfPages;
+    this.read = read;
 }
 
-function addBookToLibrary(name) {
-    const newBook = new Book(name);
+function addBookToLibrary(author, title, numberOfPages, read) {
+    const newBook = new Book(author, title, numberOfPages, read);
     myLibrary.push(newBook);
     console.log(myLibrary);
 }
 
 function displayLibrary() {
+    // Clear the library div
+    libraryDiv.innerHTML = '';
+
+
     myLibrary.forEach(book => {
         const bookDiv = document.createElement('div');
-        bookDiv.textContent = book.name;
+        bookDiv.textContent = book.author;
         libraryDiv.appendChild(bookDiv);
     });
 }
@@ -37,9 +44,22 @@ function displayForm() {
 
 
 function submitForm(event) {
-    let warn = "preventDefault() won't let you check this!<br>";
-    formSubmit.innerHTML += warn;
     event.preventDefault();
+
+    sideBarDiv.style.display = 'none';
+
+
+    const author = document.getElementById('author').value;
+    const title = document.getElementById('title').value;
+    const numberOfPages = document.getElementById('number-pages').value;
+    const read = document.getElementById('read').checked;
+
+    document.querySelector('form').reset();
+
+    addBookToLibrary(author, title, numberOfPages, read);
+
+    displayLibrary();
+
 }
 
 newBookButton.addEventListener('click', displayForm);
