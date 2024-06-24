@@ -2,7 +2,7 @@ const myLibrary = [new Book('Harry Potter'),
 new Book('The Giver'),
 new Book('Lord of the Rings')];
 
-const libraryDiv = document.querySelector('.library');
+const tableBody = document.querySelector('tbody');
 
 const newBookButton = document.querySelector('.newBook');
 
@@ -27,13 +27,32 @@ function addBookToLibrary(author, title, numberOfPages, read) {
 
 function displayLibrary() {
     // Clear the library div
-    libraryDiv.innerHTML = '';
+    tableBody.innerHTML = '';
 
 
     myLibrary.forEach(book => {
-        const bookDiv = document.createElement('div');
-        bookDiv.textContent = book.author;
-        libraryDiv.appendChild(bookDiv);
+
+        const bookRow = document.createElement('tr');
+        
+        const author = document.createElement('td');
+        author.textContent = book.author;
+
+        const title = document.createElement('td');
+        title.textContent = book.title;
+
+        const pages = document.createElement('td');
+        pages.textContent = book.numberOfPages;
+
+        const read = document.createElement('td');
+        read.textContent = book.read;
+
+
+        bookRow.appendChild(author);
+        bookRow.appendChild(title);
+        bookRow.appendChild(pages);
+        bookRow.appendChild(read);
+
+        tableBody.appendChild(bookRow);
     });
 }
 

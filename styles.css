@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 /* , whether it’s been read */
 
 button {
@@ -46,6 +47,18 @@ form {
     align-items: center;
 }
 
-input{
+input {
     margin-bottom: 10px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    width:100px;
 }
