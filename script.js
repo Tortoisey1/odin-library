@@ -19,6 +19,10 @@ function Book(author, title, numberOfPages, read, id) {
     this.id = id;
 }
 
+Book.prototype.toggleReadStatus = function() {
+    this.read = !this.read;
+};
+
 function addBookToLibrary(author, title, numberOfPages, read) {
     const newBook = new Book(author, title, numberOfPages, read, bookCounter++);
     myLibrary.push(newBook);
@@ -44,7 +48,15 @@ function displayLibrary() {
         pages.textContent = book.numberOfPages;
 
         const read = document.createElement('td');
-        read.textContent = book.read;
+        const readButton = document.createElement('button');
+        readButton.textContent = book.read;
+        readButton.addEventListener('click',()=>{
+            book.toggleReadStatus();
+            displayLibrary();
+        })
+
+
+        read.appendChild(readButton);
 
         const removeCell = document.createElement('td');
         const removeButton = document.createElement('button');
